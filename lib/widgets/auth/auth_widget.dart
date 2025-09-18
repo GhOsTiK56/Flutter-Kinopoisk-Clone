@@ -107,24 +107,94 @@ class __FormAuthWidgetState extends State<_FormAuthWidget> {
           obscureText: true,
         ),
         SizedBox(height: 30),
-        Center(
-          child: Column(children: [
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: TextButton(onPressed: () {}, style: ButtonStyle(
-                shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(20))),
-                backgroundColor: WidgetStateProperty.all(Colors.white),
-              ), child: Text('Войти'),),
+        Center(child: _ButtonsWidget()),
+        SizedBox(height: 30),
+        Align(
+          child: Text('Kinopoisk Clone — смотри что нравится!', 
+          style: textStyle.copyWith(
+            fontWeight: FontWeight.bold
+          ))),
+                  SizedBox(height: 130),
+          Align(
+          alignment: Alignment.bottomCenter,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Ru', 
+              style: textStyle.copyWith(fontSize: 13)),
+              Text('Справка и поддержка', 
+              style: textStyle.copyWith(fontSize: 13)),
+              Text('©2004-2025', 
+              style: textStyle.copyWith(fontSize: 13)),
+            ],
+          )),
+      ],
+    );
+  }
+}
+
+class _ButtonsWidget extends StatelessWidget {
+  const _ButtonsWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final buttonStyle = ButtonStyle(
+      shape: WidgetStateProperty.all(
+        RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(20)),
+      ),
+      side: WidgetStateProperty.all(BorderSide(color: Colors.black)),
+      backgroundColor: WidgetStateProperty.all(Colors.white),
+      foregroundColor: WidgetStateProperty.all(Colors.black),
+      textStyle: WidgetStateProperty.all(
+        const TextStyle(
+          inherit: true,
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SizedBox(
+          height: 50,
+          child: TextButton(
+            onPressed: () {},
+            style: buttonStyle,
+            child: Text('Войти'),
+          ),
+        ),
+        SizedBox(height: 50),
+        SizedBox(
+          height: 50,
+          child: TextButton(
+            onPressed: () {},
+            style: buttonStyle.copyWith(
+              backgroundColor: WidgetStateProperty.all(Colors.black),
+              foregroundColor: WidgetStateProperty.all(Colors.white),
+              side: WidgetStateProperty.all(
+                BorderSide(color: const Color.fromARGB(255, 41, 43, 46)),
+              ),
             ),
-            TextButton(onPressed: () {}, style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.white),
-            ), child: Text('Зарегистрироваться')),
-            TextButton(onPressed: () {}, style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.white),
-            ), child: Text('Еще')),
-          ],),
-        )
+            child: Text('Зарегистрироваться'),
+          ),
+        ),
+        SizedBox(height: 10),
+        SizedBox(
+          height: 50,
+          child: TextButton(
+            onPressed: () {},
+            style: buttonStyle.copyWith(
+              backgroundColor: WidgetStateProperty.all(
+                const Color.fromRGBO(34, 36, 38, 1),
+              ),
+              foregroundColor: WidgetStateProperty.all(Colors.white),
+              side: WidgetStateProperty.all(BorderSide.none),
+            ),
+            child: Text('Еще'),
+          ),
+        ),
       ],
     );
   }

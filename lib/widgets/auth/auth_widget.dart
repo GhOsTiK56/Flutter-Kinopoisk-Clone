@@ -1,28 +1,43 @@
 import 'package:flutter/material.dart';
 
-class AuthWidget extends StatefulWidget {
+class AuthWidget extends StatelessWidget {
   const AuthWidget({super.key});
 
   @override
-  State<AuthWidget> createState() => _AuthWidgetState();
-}
-
-class _AuthWidgetState extends State<AuthWidget> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(19, 19, 23, 1),
+      backgroundColor: const Color.fromRGBO(19, 19, 23, 1),
       appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(19, 19, 23, 1),
         leading: IconButton(
           onPressed: () {},
-          icon: Icon(Icons.arrow_back),
-          color: Colors.white,
-          iconSize: 30,
+          icon: const Icon(Icons.arrow_back, color: Colors.white, size: 30),
         ),
-        title: Text("Kinopoisk Clone", style: TextStyle(color: Colors.white)),
+        title: const Text("Kinopoisk Clone", style: TextStyle(color: Colors.white)),
         centerTitle: true,
       ),
-      body: ListView(children: [_HeaderWidget()]),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      _HeaderWidget(),
+                      SizedBox(height: 20),
+                      _FormAuthWidget(),
+                    ],
+                  ),
+                ),
+              ),
+              const _FooterWidget(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -32,43 +47,28 @@ class _HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Sign in',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-              color: Colors.white,
-              height: 2,
-            ),
-            textAlign: TextAlign.left,
-          ),
-          SizedBox(height: 20),
-          _FormAuthWidget(),
-        ],
+    return const Text(
+      'Sign in',
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 24,
+        color: Colors.white,
+        height: 2,
       ),
     );
   }
 }
 
-class _FormAuthWidget extends StatefulWidget {
+class _FormAuthWidget extends StatelessWidget {
   const _FormAuthWidget({super.key});
 
   @override
-  State<_FormAuthWidget> createState() => __FormAuthWidgetState();
-}
-
-class __FormAuthWidgetState extends State<_FormAuthWidget> {
-  @override
   Widget build(BuildContext context) {
-    final textStyle = const TextStyle(fontSize: 15, color: Colors.white);
-    final textFieldInputDecoration = InputDecoration(
+    const textStyle = TextStyle(fontSize: 15, color: Colors.white);
+    const textFieldTextStyle = TextStyle(color: Colors.white, fontSize: 18);
+
+    final textFieldDecoration = InputDecoration(
       border: OutlineInputBorder(
-        borderSide: const BorderSide(color: Colors.white),
         borderRadius: BorderRadius.circular(20),
       ),
       enabledBorder: OutlineInputBorder(
@@ -79,55 +79,38 @@ class __FormAuthWidgetState extends State<_FormAuthWidget> {
         borderSide: const BorderSide(color: Colors.white, width: 2),
         borderRadius: BorderRadius.circular(20),
       ),
-      contentPadding: EdgeInsetsGeometry.symmetric(horizontal: 10),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 10),
       hintStyle: textStyle,
-    );
-    final textFieldTextStyle = const TextStyle(
-      color: Colors.white,
-      fontSize: 18,
     );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Enter Your Email or Username', style: textStyle),
-        SizedBox(height: 5),
+        const Text('Введите Email или Username', style: textStyle),
+        const SizedBox(height: 5),
         TextField(
           cursorColor: Colors.white,
           style: textFieldTextStyle,
-          decoration: textFieldInputDecoration,
+          decoration: textFieldDecoration,
         ),
-        SizedBox(height: 20),
-        Text('Enter Your Password', style: textStyle),
-        SizedBox(height: 5),
+        const SizedBox(height: 20),
+        const Text('Введите пароль', style: textStyle),
+        const SizedBox(height: 5),
         TextField(
           cursorColor: Colors.white,
           style: textFieldTextStyle,
-          decoration: textFieldInputDecoration,
           obscureText: true,
+          decoration: textFieldDecoration,
         ),
-        SizedBox(height: 30),
-        Center(child: _ButtonsWidget()),
-        SizedBox(height: 30),
-        Align(
-          child: Text('Kinopoisk Clone — смотри что нравится!', 
-          style: textStyle.copyWith(
-            fontWeight: FontWeight.bold
-          ))),
-                  SizedBox(height: 130),
-          Align(
-          alignment: Alignment.bottomCenter,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Ru', 
-              style: textStyle.copyWith(fontSize: 13)),
-              Text('Справка и поддержка', 
-              style: textStyle.copyWith(fontSize: 13)),
-              Text('©2004-2025', 
-              style: textStyle.copyWith(fontSize: 13)),
-            ],
-          )),
+        const SizedBox(height: 30),
+        const _ButtonsWidget(),
+        const SizedBox(height: 30),
+        Center(
+          child: Text(
+            'Kinopoisk Clone — смотри что нравится!',
+            style: textStyle.copyWith(fontWeight: FontWeight.bold),
+          ),
+        ),
       ],
     );
   }
@@ -138,20 +121,16 @@ class _ButtonsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final buttonStyle = ButtonStyle(
+    final baseStyle = ButtonStyle(
       shape: WidgetStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(20)),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
-      side: WidgetStateProperty.all(BorderSide(color: Colors.black)),
-      backgroundColor: WidgetStateProperty.all(Colors.white),
-      foregroundColor: WidgetStateProperty.all(Colors.black),
       textStyle: WidgetStateProperty.all(
-        const TextStyle(
-          inherit: true,
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
-        ),
+        const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
       ),
+      foregroundColor: WidgetStateProperty.all(Colors.black),
+      backgroundColor: WidgetStateProperty.all(Colors.white),
+      side: WidgetStateProperty.all(const BorderSide(color: Colors.black)),
     );
 
     return Column(
@@ -161,41 +140,62 @@ class _ButtonsWidget extends StatelessWidget {
           height: 50,
           child: TextButton(
             onPressed: () {},
-            style: buttonStyle,
-            child: Text('Войти'),
+            style: baseStyle,
+            child: const Text('Войти'),
           ),
         ),
-        SizedBox(height: 50),
+        const SizedBox(height: 50),
         SizedBox(
           height: 50,
           child: TextButton(
             onPressed: () {},
-            style: buttonStyle.copyWith(
+            style: baseStyle.copyWith(
               backgroundColor: WidgetStateProperty.all(Colors.black),
               foregroundColor: WidgetStateProperty.all(Colors.white),
               side: WidgetStateProperty.all(
-                BorderSide(color: const Color.fromARGB(255, 41, 43, 46)),
+                const BorderSide(color: Color.fromARGB(255, 41, 43, 46)),
               ),
             ),
-            child: Text('Зарегистрироваться'),
+            child: const Text('Зарегистрироваться'),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         SizedBox(
           height: 50,
           child: TextButton(
             onPressed: () {},
-            style: buttonStyle.copyWith(
+            style: baseStyle.copyWith(
               backgroundColor: WidgetStateProperty.all(
                 const Color.fromRGBO(34, 36, 38, 1),
               ),
               foregroundColor: WidgetStateProperty.all(Colors.white),
               side: WidgetStateProperty.all(BorderSide.none),
             ),
-            child: Text('Еще'),
+            child: const Text('Еще'),
           ),
         ),
       ],
+    );
+  }
+}
+
+class _FooterWidget extends StatelessWidget {
+  const _FooterWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    const small = TextStyle(color: Colors.white, fontSize: 13);
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 40, bottom: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: const [
+          Text('Ru', style: small),
+          Text('Справка и поддержка', style: small),
+          Text('©2004-2025', style: small),
+        ],
+      ),
     );
   }
 }

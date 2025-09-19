@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kinopoisk_clone/Theme/app_button_style.dart';
 import 'package:flutter_kinopoisk_clone/Theme/app_text_style.dart';
+import 'package:flutter_kinopoisk_clone/widgets/main_screen/main_screen_widget.dart';
 
 class AuthWidget extends StatelessWidget {
   const AuthWidget({super.key});
@@ -74,14 +75,17 @@ class _FormAuthWidget extends StatefulWidget {
 class _FormAuthWidgetState extends State<_FormAuthWidget> {
   final _loginTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
-  String? errorText = null;
+  String? errorText;
 
   void _auth() {
     final login = _loginTextController.text;
     final password = _passwordTextController.text;
+     final navigator = Navigator.of(context);
 
     if (login == 'admin' && password == 'admin') {
       errorText = null;
+      navigator.pushReplacementNamed('/main_screen');
+
     } else {
       errorText = 'Не верный логин или пароль';
     }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kinopoisk_clone/Theme/app_button_style.dart';
+import 'package:flutter_kinopoisk_clone/Theme/app_colors.dart';
 import 'package:flutter_kinopoisk_clone/Theme/app_text_style.dart';
-import 'package:flutter_kinopoisk_clone/widgets/main_screen/main_screen_widget.dart';
 
 class AuthWidget extends StatelessWidget {
   const AuthWidget({super.key});
@@ -9,16 +9,16 @@ class AuthWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(19, 19, 23, 1),
+      backgroundColor: AppColors.mainColorBlack,
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(19, 19, 23, 1),
+        backgroundColor: AppColors.mainColorBlack,
         leading: IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.arrow_back, color: Colors.white, size: 30),
+          icon: const Icon(Icons.arrow_back, color: AppColors.mainColorWhite, size: 30),
         ),
         title: const Text(
           "Kinopoisk Clone",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: AppColors.mainColorWhite),
         ),
         centerTitle: true,
       ),
@@ -49,7 +49,7 @@ class AuthWidget extends StatelessWidget {
 }
 
 class _HeaderWidget extends StatelessWidget {
-  const _HeaderWidget({super.key});
+  const _HeaderWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class _HeaderWidget extends StatelessWidget {
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 24,
-        color: Colors.white,
+        color: AppColors.mainColorWhite,
         height: 2,
       ),
     );
@@ -66,7 +66,7 @@ class _HeaderWidget extends StatelessWidget {
 }
 
 class _FormAuthWidget extends StatefulWidget {
-  const _FormAuthWidget({super.key});
+  const _FormAuthWidget();
 
   @override
   State<_FormAuthWidget> createState() => _FormAuthWidgetState();
@@ -110,20 +110,20 @@ class _FormAuthWidgetState extends State<_FormAuthWidget> {
           Text(errorText, style: TextStyle(color: Colors.red, fontSize: 17)),
           const SizedBox(height: 15),
         ],
-        const Text('Введите Email или Username', style: AppTextStyle.textStyle),
+        const Text('Введите Email или Username', style: AppTextStyle.textStyleWhite),
         const SizedBox(height: 5),
         TextField(
           controller: _loginTextController,
-          cursorColor: Colors.white,
+          cursorColor: AppColors.mainColorWhite,
           style: AppTextStyle.textFieldTextStyle,
           decoration: AppTextStyle.textFieldDecoration,
         ),
         const SizedBox(height: 20),
-        const Text('Введите пароль', style: AppTextStyle.textStyle),
+        const Text('Введите пароль', style: AppTextStyle.textStyleWhite),
         const SizedBox(height: 5),
         TextField(
           controller: _passwordTextController,
-          cursorColor: Colors.white,
+          cursorColor: AppColors.mainColorWhite,
           style: AppTextStyle.textFieldTextStyle,
           obscureText: true,
           decoration: AppTextStyle.textFieldDecoration,
@@ -143,8 +143,8 @@ class _FormAuthWidgetState extends State<_FormAuthWidget> {
           child: ElevatedButton(
             onPressed: _register,
             style: AppButtonStyle.baseStyle.copyWith(
-              backgroundColor: WidgetStateProperty.all(Colors.black),
-              foregroundColor: WidgetStateProperty.all(Colors.white),
+              backgroundColor: WidgetStateProperty.all(AppColors.mainColorBlack),
+              foregroundColor: WidgetStateProperty.all(AppColors.mainColorWhite),
               side: WidgetStateProperty.all(
                 const BorderSide(color: Color.fromARGB(255, 41, 43, 46)),
               ),
@@ -161,7 +161,7 @@ class _FormAuthWidgetState extends State<_FormAuthWidget> {
               backgroundColor: WidgetStateProperty.all(
                 const Color.fromRGBO(34, 36, 38, 1),
               ),
-              foregroundColor: WidgetStateProperty.all(Colors.white),
+              foregroundColor: WidgetStateProperty.all(AppColors.mainColorWhite),
               side: WidgetStateProperty.all(BorderSide.none),
             ),
             child: const Text('Еще'),
@@ -171,7 +171,7 @@ class _FormAuthWidgetState extends State<_FormAuthWidget> {
         Center(
           child: Text(
             'Kinopoisk Clone — смотри что нравится!',
-            style: AppTextStyle.textStyle.copyWith(fontWeight: FontWeight.bold),
+            style: AppTextStyle.textStyleWhite.copyWith(fontWeight: FontWeight.bold),
           ),
         ),
       ],
@@ -180,11 +180,11 @@ class _FormAuthWidgetState extends State<_FormAuthWidget> {
 }
 
 class _FooterWidget extends StatelessWidget {
-  const _FooterWidget({super.key});
+  const _FooterWidget();
 
   @override
   Widget build(BuildContext context) {
-    const small = TextStyle(color: Colors.white, fontSize: 13);
+    const small = TextStyle(color: AppColors.mainColorWhite, fontSize: 13);
 
     return Padding(
       padding: const EdgeInsets.only(top: 40, bottom: 10),

@@ -13,6 +13,39 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   int currentPageIndex = 0;
   int currentSabTabIndex = 0;
 
+  final List<NavigationDestinatioinData> navData = [
+    NavigationDestinatioinData(
+      icon: Icons.home_filled,
+      labelText: 'Главное',
+      selectedIcon: Icons.home_filled,
+      color: AppColors.mainColorDeepOrange,
+    ),
+    NavigationDestinatioinData(
+      icon: Icons.add_to_photos,
+      labelText: 'Билеты',
+      selectedIcon: Icons.add_to_photos,
+      color: AppColors.mainColorDeepOrange,
+    ),
+    NavigationDestinatioinData(
+      icon: Icons.bookmarks_outlined,
+      labelText: 'Моё',
+      selectedIcon: Icons.bookmarks_outlined,
+      color: AppColors.mainColorDeepOrange,
+    ),
+    NavigationDestinatioinData(
+      icon: Icons.search,
+      labelText: 'Поиск',
+      selectedIcon: Icons.search,
+      color: AppColors.mainColorDeepOrange,
+    ),
+    NavigationDestinatioinData(
+      icon: Icons.person_add_alt_rounded,
+      labelText: 'Профиль',
+      selectedIcon: Icons.person_add_alt_rounded,
+      color: AppColors.mainColorDeepOrange,
+    ),
+  ];
+
   static const List<String> _subTabs = [
     'Моё кино',
     'Детям',
@@ -21,6 +54,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     'Подписки',
     'Загрузить',
   ];
+
   static const List<Widget> _mainSubTabWidgets = <Widget>[
     Center(child: Text('Моё кино', style: AppTextStyle.textStyleBlack)),
     Center(child: Text('Детям', style: AppTextStyle.textStyleBlack)),
@@ -78,13 +112,33 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           ),
         );
       case 1: // Билеты
-       return AppBar(title: const Text('Билеты'));
+        return AppBar(
+          title: const Text(
+            'Билеты',
+            style: TextStyle(color: AppColors.mainColorWhite),
+          ),
+        );
       case 2: // Моё
-        return AppBar(title: const Text('Моё'));
+        return AppBar(
+          title: const Text(
+            'Моё',
+            style: TextStyle(color: AppColors.mainColorWhite),
+          ),
+        );
       case 3: // Поиск
-        return AppBar(title: const Text('Поиск'));
+        return AppBar(
+          title: const Text(
+            'Поиск',
+            style: TextStyle(color: AppColors.mainColorWhite),
+          ),
+        );
       case 4: // Профиль
-        return AppBar(title: const Text('Профиль'));
+        return AppBar(
+          title: const Text(
+            'Профиль',
+            style: TextStyle(color: AppColors.mainColorWhite),
+          ),
+        );
       default:
         return AppBar(
           title: const Text(
@@ -101,15 +155,37 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     }
     switch (currentPageIndex) {
       case 1:
-        return const Center(child: Text('Билеты'));
+        return const Center(
+          child: Text(
+            'Билеты',
+            style: TextStyle(color: AppColors.mainColorBlack),
+          ),
+        );
       case 2:
-        return const Center(child: Text('Моё'));
+        return const Center(
+          child: Text('Моё', style: TextStyle(color: AppColors.mainColorBlack)),
+        );
       case 3:
-        return const Center(child: Text('Поиск'));
+        return const Center(
+          child: Text(
+            'Поиск',
+            style: TextStyle(color: AppColors.mainColorBlack),
+          ),
+        );
       case 4:
-        return const Center(child: Text('Профиль'));
+        return const Center(
+          child: Text(
+            'Профиль',
+            style: TextStyle(color: AppColors.mainColorBlack),
+          ),
+        );
       default:
-        return const Center(child: Text('Главное'));
+        return const Center(
+          child: Text(
+            'Главное',
+            style: TextStyle(color: AppColors.mainColorBlack),
+          ),
+        );
     }
   }
 
@@ -129,51 +205,35 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           },
           indicatorColor: AppColors.mainColorBlack,
           selectedIndex: currentPageIndex,
-          destinations: const <Widget>[
-            NavigationDestination(
-              icon: Icon(Icons.home_filled),
-              label: 'Главное',
-              selectedIcon: Icon(
-                Icons.home_filled,
-                color: AppColors.mainColorDeepOrange,
-              ),
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(
-                Icons.add_to_photos,
-                color: AppColors.mainColorDeepOrange,
-              ),
-              icon: Icon(Icons.add_to_photos),
-              label: 'Билеты',
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(
-                Icons.bookmarks_outlined,
-                color: AppColors.mainColorDeepOrange,
-              ),
-              icon: Icon(Icons.bookmarks_outlined),
-              label: 'Моё',
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(
-                Icons.search,
-                color: AppColors.mainColorDeepOrange,
-              ),
-              icon: Icon(Icons.search),
-              label: 'Поиск',
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(
-                Icons.person_add_alt_rounded,
-                color: AppColors.mainColorDeepOrange,
-              ),
-              icon: Icon(Icons.person_add_alt_rounded),
-              label: 'Профиль',
-            ),
-          ],
+          destinations: navData
+              .map(
+                (data) => NavigationDestination(
+                  icon: Icon(data._icon),
+                  label: data._labelText,
+                  selectedIcon: Icon(data._selectedIcon, color: data._color),
+                ),
+              )
+              .toList(),
         ),
         body: _buildBody(),
       ),
     );
   }
+}
+
+class NavigationDestinatioinData {
+  final String _labelText;
+  final IconData _selectedIcon;
+  final IconData _icon;
+  final Color _color;
+
+  NavigationDestinatioinData({
+    required String labelText,
+    required IconData selectedIcon,
+    required IconData icon,
+    required Color color,
+  }) : _labelText = labelText,
+       _selectedIcon = selectedIcon,
+       _icon = icon,
+       _color = color;
 }

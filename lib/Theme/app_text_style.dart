@@ -6,7 +6,6 @@ abstract class AppTextStyle {
   static const TextStyle textStyleWhite = TextStyle(fontSize: 15, color: AppColors.mainColorWhite);
   static const TextStyle textStyleBlack = TextStyle(fontSize: 15, color: AppColors.mainColorBlack);
   static const TextStyle textFieldTextStyle = TextStyle(color: Colors.white, fontSize: 18);
-
   static InputDecoration textFieldDecoration = InputDecoration(
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
       enabledBorder: OutlineInputBorder(

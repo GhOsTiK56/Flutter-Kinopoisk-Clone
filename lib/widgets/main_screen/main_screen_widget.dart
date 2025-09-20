@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kinopoisk_clone/Theme/app_colors.dart';
-import 'package:flutter_kinopoisk_clone/Theme/app_text_style.dart';
+import 'package:flutter_kinopoisk_clone/widgets/main_screen/account_screen.dart';
+import 'package:flutter_kinopoisk_clone/widgets/main_screen/main_tab_app_bar.dart';
+import 'package:flutter_kinopoisk_clone/widgets/main_screen/main_tab_body.dart';
+import 'package:flutter_kinopoisk_clone/widgets/main_screen/navigaiton_destination_data.dart';
+import 'package:flutter_kinopoisk_clone/widgets/main_screen/profile_screen.dart';
+import 'package:flutter_kinopoisk_clone/widgets/main_screen/search_screen.dart';
+import 'package:flutter_kinopoisk_clone/widgets/main_screen/ticket_screen.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({super.key});
@@ -11,169 +17,106 @@ class MainScreenWidget extends StatefulWidget {
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int currentPageIndex = 0;
-  int currentSabTabIndex = 0;
+  int currentSubTabIndex = 0;
 
-  static const List<String> _subTabs = [
-    'Моё кино',
-    'Детям',
-    'Спорт',
-    'Каналы',
-    'Подписки',
-    'Загрузить',
-  ];
-  static const List<Widget> _mainSubTabWidgets = <Widget>[
-    Center(child: Text('Моё кино', style: AppTextStyle.textStyleBlack)),
-    Center(child: Text('Детям', style: AppTextStyle.textStyleBlack)),
-    Center(child: Text('Спорт', style: AppTextStyle.textStyleBlack)),
-    Center(child: Text('Каналы', style: AppTextStyle.textStyleBlack)),
-    Center(child: Text('Подписки', style: AppTextStyle.textStyleBlack)),
-    Center(child: Text('Загрузить', style: AppTextStyle.textStyleBlack)),
+  final List<NavigationDestinationData> navData = [
+    const NavigationDestinationData(
+      icon: Icons.home_filled,
+      selectedIcon: Icons.home_filled,
+      labelText: 'Главное',
+      color: AppColors.mainColorDeepOrange,
+    ),
+    const NavigationDestinationData(
+      icon: Icons.add_to_photos,
+      selectedIcon: Icons.add_to_photos,
+      labelText: 'Билеты',
+      color: AppColors.mainColorDeepOrange,
+    ),
+    const NavigationDestinationData(
+      icon: Icons.bookmarks_outlined,
+      selectedIcon: Icons.bookmarks_outlined,
+      labelText: 'Моё',
+      color: AppColors.mainColorDeepOrange,
+    ),
+    const NavigationDestinationData(
+      icon: Icons.search,
+      selectedIcon: Icons.search,
+      labelText: 'Поиск',
+      color: AppColors.mainColorDeepOrange,
+    ),
+    const NavigationDestinationData(
+      icon: Icons.person_add_alt_rounded,
+      selectedIcon: Icons.person_add_alt_rounded,
+      labelText: 'Профиль',
+      color: AppColors.mainColorDeepOrange,
+    ),
   ];
 
-  Widget? _buildAppBar() {
-    switch (currentPageIndex) {
-      case 0: // Главное
-        return AppBar(
-          titleSpacing: 0,
-          title: Row(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(right: 16),
-                child: Icon(
-                  Icons.movie,
-                  color: AppColors.mainColorDeepOrange,
-                ), // лого
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: List.generate(_subTabs.length, (i) {
-                      final isSelected = currentSabTabIndex == i;
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              currentSabTabIndex = i;
-                            });
-                          },
-                          child: Text(
-                            _subTabs[i],
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: isSelected
-                                  ? AppColors.mainColorDeepOrange
-                                  : Colors.white,
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      case 1: // Билеты
-       return AppBar(title: const Text('Билеты'));
-      case 2: // Моё
-        return AppBar(title: const Text('Моё'));
-      case 3: // Поиск
-        return AppBar(title: const Text('Поиск'));
-      case 4: // Профиль
-        return AppBar(title: const Text('Профиль'));
-      default:
-        return AppBar(
-          title: const Text(
-            'Kinopoisk Clone',
-            style: AppTextStyle.textStyleWhite,
-          ),
-        );
+  void _setSubTabIndex(int index) {
+    setState(() {
+      currentSubTabIndex = index;
+    });
+  }
+
+  PreferredSizeWidget _buildAppBar() {
+    if (currentPageIndex == 0) {
+      return MainTabAppBar(
+        currentSubTabIndex: currentSubTabIndex,
+        onSubTabChanged: _setSubTabIndex,
+      );
+    } else {
+      final title = navData[currentPageIndex].labelText;
+      return AppBar(
+        title: Text(title, style: const TextStyle(color: AppColors.mainColorWhite)),
+      );
     }
   }
 
   Widget _buildBody() {
     if (currentPageIndex == 0) {
-      return _mainSubTabWidgets[currentSabTabIndex];
+      return MainTabBody(currentSubTabIndex: currentSubTabIndex);
     }
+
     switch (currentPageIndex) {
       case 1:
-        return const Center(child: Text('Билеты'));
+        return const TicketsScreen();
       case 2:
-        return const Center(child: Text('Моё'));
+        return const ProfileScreen();
       case 3:
-        return const Center(child: Text('Поиск'));
+        return const SearchScreen();
       case 4:
-        return const Center(child: Text('Профиль'));
+        return const AccountScreen();
       default:
-        return const Center(child: Text('Главное'));
+        return const Center(
+          child: Text('Главное', style: TextStyle(color: AppColors.mainColorBlack)),
+        );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 6,
-      child: Scaffold(
-        backgroundColor: AppColors.mainColorWhite,
-        appBar: _buildAppBar() as PreferredSizeWidget,
-        bottomNavigationBar: NavigationBar(
-          onDestinationSelected: (int index) {
-            if (currentPageIndex == index) return;
-            setState(() {
-              currentPageIndex = index;
-            });
-          },
-          indicatorColor: AppColors.mainColorBlack,
-          selectedIndex: currentPageIndex,
-          destinations: const <Widget>[
-            NavigationDestination(
-              icon: Icon(Icons.home_filled),
-              label: 'Главное',
-              selectedIcon: Icon(
-                Icons.home_filled,
-                color: AppColors.mainColorDeepOrange,
+    return Scaffold(
+      appBar: _buildAppBar(),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: currentPageIndex,
+        indicatorColor: AppColors.mainColorBlack,
+        onDestinationSelected: (index) {
+          setState(() {
+            currentPageIndex = index;
+            if (currentPageIndex != 0) currentSubTabIndex = 0; // сброс субвкладки
+          });
+        },
+        destinations: navData
+            .map(
+              (data) => NavigationDestination(
+                icon: Icon(data.icon),
+                selectedIcon: Icon(data.selectedIcon, color: data.color),
+                label: data.labelText,
               ),
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(
-                Icons.add_to_photos,
-                color: AppColors.mainColorDeepOrange,
-              ),
-              icon: Icon(Icons.add_to_photos),
-              label: 'Билеты',
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(
-                Icons.bookmarks_outlined,
-                color: AppColors.mainColorDeepOrange,
-              ),
-              icon: Icon(Icons.bookmarks_outlined),
-              label: 'Моё',
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(
-                Icons.search,
-                color: AppColors.mainColorDeepOrange,
-              ),
-              icon: Icon(Icons.search),
-              label: 'Поиск',
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(
-                Icons.person_add_alt_rounded,
-                color: AppColors.mainColorDeepOrange,
-              ),
-              icon: Icon(Icons.person_add_alt_rounded),
-              label: 'Профиль',
-            ),
-          ],
-        ),
-        body: _buildBody(),
+            )
+            .toList(),
       ),
+      body: _buildBody(),
     );
   }
 }

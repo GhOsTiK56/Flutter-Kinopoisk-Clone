@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         '/auth_screen': (context) => AuthWidget(),
         '/main_screen': (context) => MainScreenWidget(),
       },
-      initialRoute: '/main_screen',
+      initialRoute: '/auth_screen',
     );
   }
 }

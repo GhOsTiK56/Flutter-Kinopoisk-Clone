@@ -54,7 +54,7 @@ class _HeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Text(
-      'Sign in',
+      'Вход',
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 24,
@@ -73,8 +73,8 @@ class _FormAuthWidget extends StatefulWidget {
 }
 
 class _FormAuthWidgetState extends State<_FormAuthWidget> {
-  final _loginTextController = TextEditingController();
-  final _passwordTextController = TextEditingController();
+  final _loginTextController = TextEditingController(text: 'admin');
+  final _passwordTextController = TextEditingController(text: 'admin');
   String? errorText;
 
   void _auth() {

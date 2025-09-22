@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kinopoisk_clone/Theme/app_text_style.dart';
+import 'package:flutter_kinopoisk_clone/widgets/main_screen/my_film_screen/my_films_screen.dart';
 
 class MainTabBody extends StatelessWidget {
   final int currentSubTabIndex;
@@ -16,7 +17,7 @@ class MainTabBody extends StatelessWidget {
   ];
 
   static const List<Widget> subTabWidgets = [
-    Center(child: Text('Моё кино', style: AppTextStyle.textStyleWhite)),
+    Center(child: MyFilmsWidget()),
     Center(child: Text('Детям', style: AppTextStyle.textStyleWhite)),
     Center(child: Text('Спорт', style: AppTextStyle.textStyleWhite)),
     Center(child: Text('Каналы', style: AppTextStyle.textStyleWhite)),
@@ -29,3 +30,4 @@ class MainTabBody extends StatelessWidget {
     return subTabWidgets[currentSubTabIndex];
   }
 }
+

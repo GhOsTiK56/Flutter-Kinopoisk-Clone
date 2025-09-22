@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kinopoisk_clone/Theme/app_colors.dart';
-import 'package:flutter_kinopoisk_clone/widgets/main_screen/account_screen.dart';
+import 'package:flutter_kinopoisk_clone/widgets/account_screen/account_screen.dart';
 import 'package:flutter_kinopoisk_clone/widgets/main_screen/main_tab_app_bar.dart';
 import 'package:flutter_kinopoisk_clone/widgets/main_screen/main_tab_body.dart';
 import 'package:flutter_kinopoisk_clone/widgets/main_screen/navigaiton_destination_data.dart';
-import 'package:flutter_kinopoisk_clone/widgets/main_screen/profile_screen.dart';
-import 'package:flutter_kinopoisk_clone/widgets/main_screen/search_screen.dart';
-import 'package:flutter_kinopoisk_clone/widgets/main_screen/ticket_screen.dart';
+import 'package:flutter_kinopoisk_clone/widgets/profile_screen/profile_screen.dart';
+import 'package:flutter_kinopoisk_clone/widgets/search_screen/search_screen.dart';
+import 'package:flutter_kinopoisk_clone/widgets/ticket_screen/ticket_screen.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({super.key});

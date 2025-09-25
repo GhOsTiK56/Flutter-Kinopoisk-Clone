@@ -16,7 +16,7 @@ class MainTabBody extends StatelessWidget {
     'Загрузить',
   ];
 
-  static const List<Widget> subTabWidgets = [
+  static final List<Widget> subTabWidgets = [
     Center(child: MyFilmsWidget()),
     Center(child: Text('Детям', style: AppTextStyle.textStyleWhite)),
     Center(child: Text('Спорт', style: AppTextStyle.textStyleWhite)),

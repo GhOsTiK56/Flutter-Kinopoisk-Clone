@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-
-abstract class AppImages {
-  static const filmImageGameOfImitation = AssetImage('assets/images/game_imitation.png');
+class AppImages {
+  AppImages._();
+  static const String filmImageGameOfImitation = 'assets/images/game_imitation.png';
 }

@@ -116,8 +116,9 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         onDestinationSelected: (index) {
           setState(() {
             currentPageIndex = index;
-            if (currentPageIndex != 0)
+            if (currentPageIndex != 0) {
               currentSubTabIndex = 0; // сброс субвкладки
+            }
           });
         },
         destinations: navData

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_kinopoisk_clone/Theme/app_button_style.dart';
 import 'package:flutter_kinopoisk_clone/Theme/app_colors.dart';
@@ -14,7 +15,11 @@ class AuthWidget extends StatelessWidget {
         backgroundColor: AppColors.mainColorBlack,
         leading: IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.arrow_back, color: AppColors.mainColorWhite, size: 30),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: AppColors.mainColorWhite,
+            size: 30,
+          ),
         ),
         title: const Text(
           "Kinopoisk Clone",
@@ -29,7 +34,8 @@ class AuthWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
@@ -81,12 +87,11 @@ class _FormAuthWidgetState extends State<_FormAuthWidget> {
   void _auth() {
     final login = _loginTextController.text;
     final password = _passwordTextController.text;
-     final navigator = Navigator.of(context);
+    final navigator = Navigator.of(context);
 
     if (login == 'admin' && password == 'admin') {
       errorText = null;
       navigator.pushReplacementNamed('/main_screen');
-
     } else {
       errorText = 'Не верный логин или пароль';
     }
@@ -94,11 +99,11 @@ class _FormAuthWidgetState extends State<_FormAuthWidget> {
   }
 
   void _register() {
-    print('Register');
+    log('Register');
   }
 
   void _other() {
-    print('Other');
+    log('Other');
   }
 
   @override
@@ -111,71 +116,106 @@ class _FormAuthWidgetState extends State<_FormAuthWidget> {
           Text(errorText, style: TextStyle(color: Colors.red, fontSize: 17)),
           const SizedBox(height: 15),
         ],
-        //onst Text('Введите Email или Username', style: AppTextStyle.textStyleWhite),
         const SizedBox(height: 5),
-        TextField(
-          controller: _loginTextController,
-          cursorColor: AppColors.mainColorWhite,
-          style: AppTextStyle.textFieldTextStyle,
-          decoration: AppTextStyle.textFieldDecoration.copyWith(labelText: 'Введите Email или UserName',),
-        ),
+        TextFieldEmail(loginTextController: _loginTextController),
         const SizedBox(height: 20),
-       // const Text('Введите пароль', style: AppTextStyle.textStyleWhite),
         const SizedBox(height: 5),
-        TextField(
-          controller: _passwordTextController,
-          cursorColor: AppColors.mainColorWhite,
-          style: AppTextStyle.textFieldTextStyle,
-          obscureText: true,
-          decoration: AppTextStyle.textFieldDecoration.copyWith(labelText: 'Введите пароль',),
-        ),
+        TextFieldPassword(passwordTextController: _passwordTextController),
         const SizedBox(height: 30),
-        SizedBox(
-          height: 50,
-          child: ElevatedButton(
-            onPressed: _auth,
-            style: AppButtonStyle.baseStyle,
-            child: const Text('Войти'),
-          ),
-        ),
+        SizedBox(height: 50, child: buttonSignIn()),
         const SizedBox(height: 50),
-        SizedBox(
-          height: 50,
-          child: ElevatedButton(
-            onPressed: _register,
-            style: AppButtonStyle.baseStyle.copyWith(
-              backgroundColor: WidgetStateProperty.all(AppColors.mainColorBlack),
-              foregroundColor: WidgetStateProperty.all(AppColors.mainColorWhite),
-              side: WidgetStateProperty.all(
-                const BorderSide(color: Color.fromARGB(255, 41, 43, 46)),
-              ),
-            ),
-            child: const Text('Зарегистрироваться'),
-          ),
-        ),
+        SizedBox(height: 50, child: buttonRegister()),
         const SizedBox(height: 10),
-        SizedBox(
-          height: 50,
-          child: ElevatedButton(
-            onPressed: _other,
-            style: AppButtonStyle.baseStyle.copyWith(
-              backgroundColor: WidgetStateProperty.all(
-                const Color.fromRGBO(34, 36, 38, 1),
-              ),
-              foregroundColor: WidgetStateProperty.all(AppColors.mainColorWhite),
-              side: WidgetStateProperty.all(BorderSide.none),
-            ),
-            child: const Text('Еще'),
-          ),
-        ),
+        SizedBox(height: 50, child: buttonOther()),
         const SizedBox(height: 30),
         Center(
           child: Text(
             'Kinopoisk Clone — смотри что нравится!',
-            style: AppTextStyle.textStyleWhite.copyWith(fontWeight: FontWeight.bold),
+            style: AppTextStyle.textStyleWhite.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],
+    );
+  }
+
+  ElevatedButton buttonSignIn() {
+    return ElevatedButton(
+      onPressed: _auth,
+      style: AppButtonStyle.baseStyle,
+      child: const Text('Войти'),
+    );
+  }
+
+  ElevatedButton buttonOther() {
+    return ElevatedButton(
+      onPressed: _other,
+      style: AppButtonStyle.baseStyle.copyWith(
+        backgroundColor: WidgetStateProperty.all(
+          const Color.fromRGBO(34, 36, 38, 1),
+        ),
+        foregroundColor: WidgetStateProperty.all(AppColors.mainColorWhite),
+        side: WidgetStateProperty.all(BorderSide.none),
+      ),
+      child: const Text('Еще'),
+    );
+  }
+
+  ElevatedButton buttonRegister() {
+    return ElevatedButton(
+      onPressed: _register,
+      style: AppButtonStyle.baseStyle.copyWith(
+        backgroundColor: WidgetStateProperty.all(AppColors.mainColorBlack),
+        foregroundColor: WidgetStateProperty.all(AppColors.mainColorWhite),
+        side: WidgetStateProperty.all(
+          const BorderSide(color: Color.fromARGB(255, 41, 43, 46)),
+        ),
+      ),
+      child: const Text('Зарегистрироваться'),
+    );
+  }
+}
+
+class TextFieldPassword extends StatelessWidget {
+  const TextFieldPassword({
+    super.key,
+    required TextEditingController passwordTextController,
+  }) : _passwordTextController = passwordTextController;
+
+  final TextEditingController _passwordTextController;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: _passwordTextController,
+      cursorColor: AppColors.mainColorWhite,
+      style: AppTextStyle.textFieldTextStyle,
+      obscureText: true,
+      decoration: AppTextStyle.textFieldDecoration.copyWith(
+        labelText: 'Введите пароль',
+      ),
+    );
+  }
+}
+
+class TextFieldEmail extends StatelessWidget {
+  const TextFieldEmail({
+    super.key,
+    required TextEditingController loginTextController,
+  }) : _loginTextController = loginTextController;
+
+  final TextEditingController _loginTextController;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: _loginTextController,
+      cursorColor: AppColors.mainColorWhite,
+      style: AppTextStyle.textFieldTextStyle,
+      decoration: AppTextStyle.textFieldDecoration.copyWith(
+        labelText: 'Введите Email или UserName',
+      ),
     );
   }
 }

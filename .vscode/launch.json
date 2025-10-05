@@ -5,15 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Flutter",
+            "name": "flutter_kinopoisk_clone (debug mode)",
+            "request": "launch",
             "type": "dart",
-            "request": "launch",
             "program": "lib/main.dart"
-        },
-        {
-            "name": "flutter_kinopoisk_clone",
-            "request": "launch",
-            "type": "dart"
         },
         {
             "name": "flutter_kinopoisk_clone (profile mode)",

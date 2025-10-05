@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kinopoisk_clone/Theme/app_colors.dart';
 import 'package:flutter_kinopoisk_clone/widgets/auth/auth_widget.dart';
-import 'package:flutter_kinopoisk_clone/widgets/main_screen/main_screen_widget.dart';
+import 'package:flutter_kinopoisk_clone/widgets/main_screen/main_tab_and_app_bar/main_screen_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         brightness: Brightness.dark,

@@ -21,20 +21,11 @@ class MyApp extends StatelessWidget {
           seedColor: AppColors.mainColorBlack,
           brightness: Brightness.dark,
         ),
-        appBarTheme: AppBarTheme(backgroundColor: AppColors.mainColorBlack),
-        navigationBarTheme: NavigationBarThemeData(
-          backgroundColor: AppColors.mainColorBlack,
-          iconTheme: WidgetStateProperty.all(
-            IconThemeData(color: AppColors.mainColorWhite),
-          ),
-          labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>((states) {
-            if (states.contains(WidgetState.selected)) {
-              return TextStyle(color: Colors.deepOrange);
-            }
-            return TextStyle(color: Colors.white);
-          }),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: AppColors.mainColorDarkBlue,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.grey,
         ),
-        scaffoldBackgroundColor: AppColors.mainColorBlack,
       ),
       routes: {
         '/auth_screen': (context) => AuthWidget(),

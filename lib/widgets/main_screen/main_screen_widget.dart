@@ -28,7 +28,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.mainColorBlack,
+      backgroundColor: AppColors.mainColorWhite,
       appBar: AppBar(
         backgroundColor: AppColors.mainColorDarkBlue,
         title: Center(

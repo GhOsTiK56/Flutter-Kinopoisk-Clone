@@ -16,11 +16,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        brightness: Brightness.dark,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: AppColors.mainColorBlack,
-          brightness: Brightness.dark,
-        ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: AppColors.mainColorDarkBlue,
           selectedItemColor: Colors.white,
@@ -28,8 +23,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routes: {
-        '/auth_screen': (context) => AuthWidget(),
-        '/main_screen': (context) => MainScreenWidget(),
+        '/auth_screen': (context) => const AuthWidget(),
+        '/main_screen': (context) => const MainScreenWidget(),
       },
       initialRoute: '/auth_screen',
     );

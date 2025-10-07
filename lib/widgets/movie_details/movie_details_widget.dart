@@ -21,7 +21,10 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
           style: TextStyle(color: AppColors.mainColorWhite),
         ),
       ),
-      body: ListView(children: [MovieDetailsMainInfoWidget()]),
+      body: ColoredBox(
+        color: Color.fromRGBO(22, 23, 27, 1),
+        child: ListView(children: [MovieDetailsMainInfoWidget()]),
+      ),
     );
   }
 }

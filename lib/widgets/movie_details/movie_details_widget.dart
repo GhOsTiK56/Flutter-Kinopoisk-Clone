@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kinopoisk_clone/Theme/app_colors.dart';
 import 'package:flutter_kinopoisk_clone/widgets/movie_details/movie_details_main_info_widget.dart';
+import 'package:flutter_kinopoisk_clone/widgets/movie_details/movie_details_main_screen_cast_widget.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
   final int movieId;
@@ -23,7 +24,12 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
       ),
       body: ColoredBox(
         color: Color.fromRGBO(22, 23, 27, 1),
-        child: ListView(children: [MovieDetailsMainInfoWidget()]),
+        child: ListView(
+          children: [
+            MovieDetailsMainInfoWidget(),
+            MovieDetailsMainScreenCastWidget(),
+          ],
+        ),
       ),
     );
   }

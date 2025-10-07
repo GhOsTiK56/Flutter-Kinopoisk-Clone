@@ -2,6 +2,7 @@ import 'package:flutter_kinopoisk_clone/resources/app_images.dart';
 import 'package:flutter/material.dart';
 
 class Movie {
+  final int id;
   final String imageName;
   final String title;
   final String time;
@@ -12,6 +13,7 @@ class Movie {
     required this.title,
     required this.time,
     required this.description,
+    required this.id,
   });
 }
 
@@ -30,6 +32,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
       time: 'October 5, 2021',
       description:
           ':LKJFGDL:FKJGD:LFJG:DLFGJ:DLFKGJ:DFLGKJDF:LGKJDFL:GKJDFL:GJKDFL:GJ',
+      id: 1,
     ),
     Movie(
       imageName: AppImages.filmImageGameOfImitation,
@@ -37,6 +40,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
       time: 'October 5, 2021',
       description:
           ':LKJFGDL:FKJGD:LFJG:DLFGJ:DLFKGJ:DFLGKJDF:LGKJDFL:GKJDFL:GJKDFL:GJ',
+      id: 2,
     ),
     Movie(
       imageName: AppImages.filmImageGameOfImitation,
@@ -44,6 +48,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
       time: 'October 5, 2021',
       description:
           ':LKJFGDL:FKJGD:LFJG:DLFGJ:DLFKGJ:DFLGKJDF:LGKJDFL:GKJDFL:GJKDFL:GJ',
+      id: 3,
     ),
     Movie(
       imageName: AppImages.filmImageGameOfImitation,
@@ -51,6 +56,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
       time: 'October 5, 2021',
       description:
           ':LKJFGDL:FKJGD:LFJG:DLFGJ:DLFKGJ:DFLGKJDF:LGKJDFL:GKJDFL:GJKDFL:GJ',
+      id: 4,
     ),
     Movie(
       imageName: AppImages.filmImageGameOfImitation,
@@ -58,6 +64,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
       time: 'October 5, 2021',
       description:
           ':LKJFGDL:FKJGD:LFJG:DLFGJ:DLFKGJ:DFLGKJDF:LGKJDFL:GKJDFL:GJKDFL:GJ',
+      id: 5,
     ),
     Movie(
       imageName: AppImages.filmImageGameOfImitation,
@@ -65,6 +72,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
       time: 'October 5, 2021',
       description:
           ':LKJFGDL:FKJGD:LFJG:DLFGJ:DLFKGJ:DFLGKJDF:LGKJDFL:GKJDFL:GJKDFL:GJ',
+      id: 6,
     ),
     Movie(
       imageName: AppImages.filmImageGameOfImitation,
@@ -72,6 +80,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
       time: 'October 5, 2021',
       description:
           ':LKJFGDL:FKJGD:LFJG:DLFGJ:DLFKGJ:DFLGKJDF:LGKJDFL:GKJDFL:GJKDFL:GJ',
+      id: 7,
     ),
   ];
 
@@ -88,6 +97,13 @@ class _MovieListWidgetState extends State<MovieListWidget> {
       filteredMovies = _movieList;
     }
     setState(() {});
+  }
+
+  void _onMovieTap(int index) {
+    final id = _movieList[index].id;
+    Navigator.of(
+      context,
+    ).pushNamed('/main_screen/movie_details', arguments: id);
   }
 
   @override
@@ -181,7 +197,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                     Material(
                       color: Colors.transparent,
                       borderRadius: BorderRadius.circular(10),
-                      child: InkWell(onTap: () {}),
+                      child: InkWell(onTap: () => _onMovieTap(index)),
                     ),
                   ],
                 ),

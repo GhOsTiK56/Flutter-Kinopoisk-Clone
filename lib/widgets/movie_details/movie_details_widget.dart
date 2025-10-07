@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_kinopoisk_clone/Theme/app_colors.dart';
+import 'package:flutter_kinopoisk_clone/widgets/movie_details/movie_details_main_info_widget.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
   final int movieId;
@@ -11,6 +13,15 @@ class MovieDetailsWidget extends StatefulWidget {
 class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.mainColorDarkBlue,
+        title: Text(
+          'Game of Imitation',
+          style: TextStyle(color: AppColors.mainColorWhite),
+        ),
+      ),
+      body: ListView(children: [MovieDetailsMainInfoWidget()]),
+    );
   }
 }

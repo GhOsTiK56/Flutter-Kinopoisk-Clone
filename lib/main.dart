@@ -19,8 +19,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: AppColors.mainColorDarkBlue,
-          selectedItemColor: Colors.white,
+          selectedItemColor: AppColors.mainColorWhite,
           unselectedItemColor: Colors.grey,
+        ),
+        appBarTheme: AppBarThemeData(
+          iconTheme: IconThemeData(color: AppColors.mainColorWhite),
         ),
       ),
       routes: {

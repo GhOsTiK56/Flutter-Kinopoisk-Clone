@@ -60,35 +60,50 @@ class MyPaint extends CustomPainter {
   });
   @override
   void paint(Canvas canvas, Size size) {
-    final backgroundPaint = Paint()
-      ..color = fillColor
-      ..style = PaintingStyle.fill;
-    canvas.drawOval(Offset.zero & size, backgroundPaint);
+    final arcRect = calculateArcsRect(size);
 
-    final freePaint = Paint()
-      ..color = freeColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = lineWidth;
-    canvas.drawArc(
-      Offset(5.5, 5.5) & Size(size.width - 11, size.height - 11),
-      pi * 2 * percent - (pi / 2),
-      pi * 2 * (1 - percent),
-      false,
-      freePaint,
-    );
+    drawBackground(canvas, size);
+    drawFreeArc(canvas, arcRect);
+    drawFilledArc(canvas, arcRect);
+  }
 
-    final fellPaint = Paint()
+  void drawFilledArc(Canvas canvas, Rect arcRect) {
+    final paint = Paint()
       ..color = lineColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = lineWidth
       ..strokeCap = StrokeCap.round;
+    canvas.drawArc(arcRect, -pi / 2, pi * 2 * percent, false, paint);
+  }
+
+  void drawFreeArc(Canvas canvas, Rect arcRect) {
+    final paint = Paint()
+      ..color = freeColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = lineWidth;
     canvas.drawArc(
-      Offset(5.5, 5.5) & Size(size.width - 11, size.height - 11),
-      -pi / 2,
-      pi * 2 * percent,
+      arcRect,
+      pi * 2 * percent - (pi / 2),
+      pi * 2 * (1 - percent),
       false,
-      fellPaint,
+      paint,
     );
+  }
+
+  void drawBackground(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = fillColor
+      ..style = PaintingStyle.fill;
+    canvas.drawOval(Offset.zero & size, paint);
+  }
+
+  Rect calculateArcsRect(Size size) {
+    final linesMargin = 3;
+    final offset = lineWidth / 2 + linesMargin;
+    final arcRect =
+        Offset(offset, offset) &
+        Size(size.width - offset * 2, size.height - offset * 2);
+    return arcRect;
   }
 
   @override
